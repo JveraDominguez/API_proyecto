@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 
 from personas.views import ver_persona, eliminar_persona, crear_persona, crear_automovil, editar_persona, \
-    editar_automovil
+    editar_automovil, ReportePersonasExcel
 from webapp.views import bienvenida
 
 urlpatterns = [
@@ -30,4 +30,5 @@ urlpatterns = [
     path('crear_automovil/', crear_automovil, name='crear_automovil'),
     path('editar_persona/<int:persona_id>/', editar_persona, name='editar_persona'),
     path('editar_automovil/<int:automovil_id>/', editar_automovil, name='editar_automovil'),
+    path('reporte_excel/', ReportePersonasExcel.as_view(),name='reporte'),
 ]

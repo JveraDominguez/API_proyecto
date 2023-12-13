@@ -18,8 +18,10 @@
                             Marca del auto: {{ automovil.marca_auto }}<br>
                             Color: {{ automovil.color_auto }}<br>
                             Placa: {{ automovil.placa_auto }}<br>
+                            fecha de compra:{{ automovil.fecha_compra }}<br>
                             {% if automovil.propietario %}
-                                Propietario: {{ automovil.propietario.nombre }} {{ automovil.propietario.apellido }}<br>
+                                Propietario: {{ automovil.propietario.nombre }} {{ automovil.propietario.apellido }} <br>
+                                cedula: {{ automovil.propietario.cedula }} <br>
                             {% else %}
                                 Sin propietario<br>
                             {% endif %}

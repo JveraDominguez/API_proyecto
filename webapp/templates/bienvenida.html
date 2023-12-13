@@ -26,6 +26,7 @@
         <div align="center" class="mb-3">
             <a href="{% url 'crear_persona' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Persona</a>
             <a href="{% url 'crear_automovil' %}" class="btn btn-success"><i class="fas fa-plus"></i> Agregar Automóvil</a>
+            <a href="{% url 'reporte' %}" class="btn btn-success"><i class="fa-solid fa-file-excel"></i> reportes</a>
         </div>
 
         <table class="table table-bordered border-primary">
@@ -59,6 +60,7 @@
                 {% endfor %}
             </tbody>
         </table>
+
     </div>
 </body>
 </html>

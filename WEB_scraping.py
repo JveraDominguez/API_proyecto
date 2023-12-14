@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+from io import StringIO
 
 url = 'http://127.0.0.1:8000/'
 html_doc = requests.get(url)
@@ -16,7 +17,7 @@ df = pd.DataFrame()
 # Itera sobre las tablas
 for i, tabla in enumerate(tablas, start=1):
     # Lee la tabla y convierte los datos en un DataFrame
-    tabla_df = pd.read_html(str(tabla))[0]
+    tabla_df = pd.read_html(StringIO(tabla.prettify()))[0]
 
     # Elimina la columna "Acciones" si existe
     if "Acciones" in tabla_df.columns:
@@ -25,7 +26,7 @@ for i, tabla in enumerate(tablas, start=1):
     # Concatena el DataFrame de la tabla al DataFrame principal
     df = pd.concat([df, tabla_df])
 
-# Guarda el DataFrame en un archivo Excel
-df.to_excel('Scrapingproyecto.xlsx', index=False)
+# Guarda el DataFrame en un archivo CSV
+df.to_csv('Scrapingproyecto.csv', index=False)
 
-print("Los datos se han guardado correctamente en 'output_pandas.xlsx'.")
+print("Los datos se han guardado correctamente en 'output_pandas.csv'.")

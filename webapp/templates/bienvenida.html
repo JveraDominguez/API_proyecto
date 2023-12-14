@@ -1,0 +1,66 @@
+<!-- bienvenida.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- contenido de bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- contenido de bootstrap -->
+    <script src="https://kit.fontawesome.com/fe16a9adb8.js" crossorigin="anonymous"></script>
+    <!-- iconos-->
+    <title>Bienvenida</title>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenida</h1>
+
+        <p>La cantidad de personas registradas es: {{ cantidad_automoviles }}</p>
+
+        <h2>Listado de Propietarios</h2>
+
+        <div align="center" class="mb-3">
+            <a href="{% url 'crear_persona' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Persona</a>
+            <a href="{% url 'crear_automovil' %}" class="btn btn-success"><i class="fas fa-plus"></i> Agregar Automóvil</a>
+            <a href="{% url 'reporte' %}" class="btn btn-success"><i class="fa-solid fa-file-excel"></i> reportes</a>
+        </div>
+
+        <table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Propietario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for automovil in automoviles %}
+                    <tr>
+                        <td>{{ automovil.id }}</td>
+                        <td>
+                            {% if automovil.propietario %}
+                                {{ automovil.propietario.nombre }} {{ automovil.propietario.apellido }}
+                            {% else %}
+                                Sin propietario
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'ver_persona' persona_id=automovil.propietario.id %}"><i class="fa-regular fa-eye"></i></a>
+                            {% if automovil.propietario %}
+                                <a href="{% url 'eliminar_persona' persona_id=automovil.propietario.id %}"><i class="fas fa-trash"></i></a>
+                                <a href="{% url 'editar_persona' persona_id=automovil.propietario.id %}"> <i class="fa-solid fa-person"></i></a>
+                            {% endif %}
+                            <a href="{% url 'editar_automovil' automovil_id=automovil.id %}"><i class="fa-solid fa-car"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>

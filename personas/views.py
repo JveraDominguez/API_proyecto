@@ -1,11 +1,15 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import TemplateView
 from openpyxl import Workbook
+from rest_framework import viewsets, permissions
 
+from . import serializers
 from .forms import CrearAutomovilForm, CrearPersonaForm
 from .models import Persona, automovile
+from .serializers import UserSerializer, PersonaSerializer
 
 
 # Create your views here.
@@ -117,3 +121,15 @@ class ReportePersonasExcel(View):
         response["Content-Disposition"] = contenido
         wb.save(response)
         return response
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+class PersonaViewSet(viewsets.ModelViewSet):
+    queryset = Persona.objects.all()
+    serializer_class = PersonaSerializer
+
+class PersonaViewSet(viewsets.ModelViewSet):
+    queryset = Persona.objects.all()
+    serializer_class = PersonaSerializer

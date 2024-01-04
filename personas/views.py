@@ -129,7 +129,3 @@ class UserViewSet(viewsets.ModelViewSet):
 class PersonaViewSet(viewsets.ModelViewSet):
     queryset = Persona.objects.all()
     serializer_class = PersonaSerializer
-
-class PersonaViewSet(viewsets.ModelViewSet):
-    queryset = Persona.objects.all()
-    serializer_class = PersonaSerializer
